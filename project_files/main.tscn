@@ -132,12 +132,14 @@ script = SubResource("GDScript_7dm0k")
 tracker = &"left_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController" unique_id=1675146495]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("BoxMesh_0xm2m")
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1885203802]
 tracker = &"right_hand"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=2116023675]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 mesh = SubResource("BoxMesh_h2yge")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1054611627]
