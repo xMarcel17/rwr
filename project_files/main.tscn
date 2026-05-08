@@ -134,6 +134,11 @@ sky = SubResource("Sky_0xm2m")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_h2yge"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.01
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 size = Vector2(20, 20)
 
@@ -182,6 +187,13 @@ tracker = &"right_hand"
 
 [node name="Sketchfab_Scene" parent="XROrigin3D/RightController/HandleRightRoot" unique_id=1646581862 instance=ExtResource("1_0xm2m")]
 transform = Transform3D(6.556708e-08, 0.5, 2.1855694e-08, 1.9106855e-15, 2.1855694e-08, -0.5, -0.5, 6.556708e-08, 9.553427e-16, 0, 0, -0.6)
+
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController" unique_id=2072714039]
+target_position = Vector3(0, 0, -10)
+
+[node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=1223339784]
+visible = false
+mesh = SubResource("CylinderMesh_h2yge")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1054611627]
 
