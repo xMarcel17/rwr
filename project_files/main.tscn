@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btmugdosh4r23"]
 
 [ext_resource type="PackedScene" uid="uid://qkwbjiue34rf" path="res://hand_low-poly_stylized_vr_rigged.glb" id="1_0xm2m"]
+[ext_resource type="Script" uid="uid://cbppmyvbq123j" path="res://locomotion.gd" id="1_h2yge"]
 [ext_resource type="PackedScene" uid="uid://ctltchlf2j2r4" path="res://addons/xr-simulator/XRSimulator.tscn" id="1_ig7tw"]
 
 [sub_resource type="GDScript" id="GDScript_7dm0k"]
@@ -162,6 +163,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=727280916]
+script = ExtResource("1_h2yge")
 
 [node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D" unique_id=320907532]
 
