@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://btmugdosh4r23"]
 
+[ext_resource type="PackedScene" uid="uid://qkwbjiue34rf" path="res://hand_low-poly_stylized_vr_rigged.glb" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://ctltchlf2j2r4" path="res://addons/xr-simulator/XRSimulator.tscn" id="1_ig7tw"]
 
 [sub_resource type="GDScript" id="GDScript_7dm0k"]
@@ -132,10 +133,6 @@ sky = SubResource("Sky_0xm2m")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
-
 [sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
 size = Vector2(20, 20)
 
@@ -171,16 +168,18 @@ shadow_enabled = true
 [node name="LeftController" type="XRController3D" parent="XROrigin3D" unique_id=1721785330]
 tracker = &"left_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/LeftController" unique_id=1675146495]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("BoxMesh_0xm2m")
+[node name="HandleLeftRoot" type="Node3D" parent="XROrigin3D/LeftController" unique_id=1952302383]
+
+[node name="Sketchfab_Scene" parent="XROrigin3D/LeftController/HandleLeftRoot" unique_id=1372651441 instance=ExtResource("1_0xm2m")]
+transform = Transform3D(-2.1855694e-08, 0.5, -2.1855694e-08, 0, -2.1855694e-08, -0.5, -0.5, -2.1855694e-08, 9.553427e-16, 0, 0, -0.6)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D" unique_id=1885203802]
 tracker = &"right_hand"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController" unique_id=2116023675]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-mesh = SubResource("BoxMesh_h2yge")
+[node name="HandleRightRoot" type="Node3D" parent="XROrigin3D/RightController" unique_id=1687836399]
+
+[node name="Sketchfab_Scene" parent="XROrigin3D/RightController/HandleRightRoot" unique_id=1646581862 instance=ExtResource("1_0xm2m")]
+transform = Transform3D(6.556708e-08, 0.5, 2.1855694e-08, 1.9106855e-15, 2.1855694e-08, -0.5, -0.5, 6.556708e-08, 9.553427e-16, 0, 0, -0.6)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1054611627]
 
@@ -203,7 +202,7 @@ mesh = SubResource("PlaneMesh_1bvp3")
 shape = SubResource("BoxShape3D_lquwl")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Sceneria" unique_id=194311873]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -3)
 mesh = SubResource("BoxMesh_7mycd")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D2" unique_id=2125687096]
@@ -212,7 +211,7 @@ mesh = SubResource("BoxMesh_7mycd")
 shape = SubResource("BoxShape3D_272bh")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="Sceneria" unique_id=2120702845]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -8)
 mesh = SubResource("BoxMesh_5vw27")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D3" unique_id=759074164]
@@ -221,7 +220,7 @@ mesh = SubResource("BoxMesh_5vw27")
 shape = SubResource("BoxShape3D_272bh")
 
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="Sceneria" unique_id=182002984]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -5)
 mesh = SubResource("CylinderMesh_kek77")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D4" unique_id=775347035]
