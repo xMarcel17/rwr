@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://btmugdosh4r23"]
 
+[ext_resource type="PackedScene" uid="uid://ctltchlf2j2r4" path="res://addons/xr-simulator/XRSimulator.tscn" id="1_ig7tw"]
+
 [sub_resource type="GDScript" id="GDScript_7dm0k"]
 script/source = "extends Node3D
 
@@ -11,35 +13,35 @@ func _ready() -> void:
 
   webxr_interface = XRServer.find_interface(\"WebXR\")
   if webxr_interface:
-    # WebXR uses a lot of asynchronous callbacks, so we connect to various
-    # signals in order to receive them.
-    webxr_interface.session_supported.connect(self._webxr_session_supported)
-    webxr_interface.session_started.connect(self._webxr_session_started)
-    webxr_interface.session_ended.connect(self._webxr_session_ended)
-    webxr_interface.session_failed.connect(self._webxr_session_failed)
+	# WebXR uses a lot of asynchronous callbacks, so we connect to various
+	# signals in order to receive them.
+	webxr_interface.session_supported.connect(self._webxr_session_supported)
+	webxr_interface.session_started.connect(self._webxr_session_started)
+	webxr_interface.session_ended.connect(self._webxr_session_ended)
+	webxr_interface.session_failed.connect(self._webxr_session_failed)
 
-    webxr_interface.select.connect(self._webxr_on_select)
-    webxr_interface.selectstart.connect(self._webxr_on_select_start)
-    webxr_interface.selectend.connect(self._webxr_on_select_end)
+	webxr_interface.select.connect(self._webxr_on_select)
+	webxr_interface.selectstart.connect(self._webxr_on_select_start)
+	webxr_interface.selectend.connect(self._webxr_on_select_end)
 
-    webxr_interface.squeeze.connect(self._webxr_on_squeeze)
-    webxr_interface.squeezestart.connect(self._webxr_on_squeeze_start)
-    webxr_interface.squeezeend.connect(self._webxr_on_squeeze_end)
+	webxr_interface.squeeze.connect(self._webxr_on_squeeze)
+	webxr_interface.squeezestart.connect(self._webxr_on_squeeze_start)
+	webxr_interface.squeezeend.connect(self._webxr_on_squeeze_end)
 
-    # This returns immediately - our _webxr_session_supported() method
-    # (which we connected to the \"session_supported\" signal above) will
-    # be called sometime later to let us know if it's supported or not.
-    webxr_interface.is_session_supported(\"immersive-vr\")
+	# This returns immediately - our _webxr_session_supported() method
+	# (which we connected to the \"session_supported\" signal above) will
+	# be called sometime later to let us know if it's supported or not.
+	webxr_interface.is_session_supported(\"immersive-vr\")
 
   $XROrigin3D/LeftController.button_pressed.connect(self._on_left_controller_button_pressed)
   $XROrigin3D/LeftController.button_released.connect(self._on_left_controller_button_released)
 
 func _webxr_session_supported(session_mode: String, supported: bool) -> void:
   if session_mode == 'immersive-vr':
-    if supported:
-      $CanvasLayer.visible = true
-    else:
-      OS.alert(\"Your browser doesn't support VR\")
+	if supported:
+	  $CanvasLayer.visible = true
+	else:
+	  OS.alert(\"Your browser doesn't support VR\")
 
 func _on_button_pressed() -> void:
   # We want an immersive VR session, as opposed to AR ('immersive-ar') or a
@@ -62,8 +64,8 @@ func _on_button_pressed() -> void:
   # only know if it's really succeeded or failed when our
   # _webxr_session_started() or _webxr_session_failed() methods are called.
   if not webxr_interface.initialize():
-    OS.alert(\"Failed to initialize WebXR\")
-    return
+	OS.alert(\"Failed to initialize WebXR\")
+	return
 
 func _webxr_session_started() -> void:
   $CanvasLayer.visible = false
@@ -92,7 +94,7 @@ func _on_left_controller_button_released(button: String) -> void:
 func _process(_delta: float) -> void:
   var thumbstick_vector: Vector2 = $XROrigin3D/LeftController.get_vector2(\"thumbstick\")
   if thumbstick_vector != Vector2.ZERO:
-    print (\"Left thumbstick position: \" + str(thumbstick_vector))
+	print (\"Left thumbstick position: \" + str(thumbstick_vector))
 
 func _webxr_on_select(input_source_id: int) -> void:
   print(\"Select: \" + str(input_source_id))
@@ -117,12 +119,50 @@ func _webxr_on_squeeze_end(input_source_id: int) -> void:
   print(\"Squeeze End: \" + str(input_source_id))
 "
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ig7tw"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_0xm2m"]
+sky_material = SubResource("ProceduralSkyMaterial_ig7tw")
+
+[sub_resource type="Environment" id="Environment_h2yge"]
+background_mode = 2
+sky = SubResource("Sky_0xm2m")
+tonemap_mode = 2
+glow_enabled = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_0xm2m"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_h2yge"]
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_1bvp3"]
+size = Vector2(20, 20)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_272bh"]
+size = Vector3(20, 0.1, 20)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5vw27"]
+size = Vector3(1, 3, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kek77"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4c57u"]
+
 [node name="Node3D" type="Node3D" unique_id=1181481581]
 script = SubResource("GDScript_7dm0k")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1762168827]
+environment = SubResource("Environment_h2yge")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=686516974]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="XROrigin3D" type="XROrigin3D" parent="." unique_id=727280916]
 
@@ -148,3 +188,43 @@ mesh = SubResource("BoxMesh_h2yge")
 offset_right = 8.0
 offset_bottom = 8.0
 text = "Enter VR"
+
+[node name="XRSimulator" parent="." unique_id=124497681 instance=ExtResource("1_ig7tw")]
+
+[node name="Sceneria" type="Node3D" parent="." unique_id=1633318283]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sceneria" unique_id=1104484043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011965275, -2.3841858e-07, 0.0010991096)
+mesh = SubResource("PlaneMesh_1bvp3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D" unique_id=1269128385]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sceneria/MeshInstance3D/StaticBody3D" unique_id=117115682]
+shape = SubResource("BoxShape3D_lquwl")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Sceneria" unique_id=194311873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+mesh = SubResource("BoxMesh_7mycd")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D2" unique_id=2125687096]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sceneria/MeshInstance3D2/StaticBody3D" unique_id=1387816945]
+shape = SubResource("BoxShape3D_272bh")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Sceneria" unique_id=2120702845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+mesh = SubResource("BoxMesh_5vw27")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D3" unique_id=759074164]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sceneria/MeshInstance3D3/StaticBody3D" unique_id=1441924391]
+shape = SubResource("BoxShape3D_272bh")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Sceneria" unique_id=182002984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 3)
+mesh = SubResource("CylinderMesh_kek77")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Sceneria/MeshInstance3D4" unique_id=775347035]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sceneria/MeshInstance3D4/StaticBody3D" unique_id=1616629425]
+shape = SubResource("CylinderShape3D_4c57u")
